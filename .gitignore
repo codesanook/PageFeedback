@@ -1,0 +1,13 @@
+obj
+bin
+*.user
+_ReSharper*
+*.suo
+logs
+Main/packages/*
+!Main/packages/repositories.config
+*target*
+*.class
+build
+.settings/*
+
