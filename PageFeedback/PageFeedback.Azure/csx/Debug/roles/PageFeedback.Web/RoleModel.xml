@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PageFeedback.Web" version="2.4.6499.5" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <Runtime>
+    <EntryPoint>
+      <NetFxEntryPoint assemblyName="PageFeedback.Web.dll" targetFrameworkVersion="v4.0" />
+    </EntryPoint>
+  </Runtime>
+  <Properties>
+    <Property name="TargetFrameworkVersion" value="v4.5" />
+    <Property name="RoleType" value="Web" />
+    <Property name="RoleName" value="PageFeedback.Web" />
+    <Property name="ProjectName" value="PageFeedback.Web" />
+    <Property name="Configuration" value="Debug" />
+    <Property name="Platform" value="AnyCPU" />
+    <Property name="RoleTargetFramework" value="v4.5" />
+    <Property name="OutputDir" value="D:\projects\PageFeedback\PageFeedback\PageFeedback.Azure\obj\Debug\PageFeedback.Web\" />
+    <Property name="EntryPoint" value="PageFeedback.Web.dll" />
+    <Property name="SourceDir" value="D:\projects\PageFeedback\PageFeedback\PageFeedback.Web\" />
+    <Property name="SitePhysicalPath" value="D:\projects\PageFeedback\PageFeedback\PageFeedback.Web\" />
+    <Property name="TargetRuntimeVersion" value="v4.0" />
+  </Properties>
+  <Sites>
+    <Site name="Web" physicalDirectory="D:\projects\PageFeedback\PageFeedback\PageFeedback.Web\">
+      <Bindings>
+        <Binding name="Endpoint1" endpointName="Endpoint1" />
+      </Bindings>
+    </Site>
+  </Sites>
+</RoleModel>
