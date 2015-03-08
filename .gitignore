@@ -10,4 +10,6 @@ src/packages/*
 *.class
 build
 .settings/*
-
+icuService/.settings/*
+RemoteSystemsTempFiles/*
+.metadata/*
