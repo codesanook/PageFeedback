@@ -13,3 +13,4 @@ build
 icuService/.settings/*
 RemoteSystemsTempFiles/*
 .metadata/*
+PageFeedback/DemoAzureSubscriptionFile.publishsettings
