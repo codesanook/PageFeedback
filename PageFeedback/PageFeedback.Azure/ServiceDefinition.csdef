@@ -17,6 +17,7 @@
     </LocalResources>
     <ConfigurationSettings>
       <Setting name="AzureStorageConnectionString" />
+      <Setting name="SqlAzureConnectionString" />
     </ConfigurationSettings>
   </WebRole>
   <WorkerRole name="PageFeedback.Worker" vmsize="ExtraSmall">
@@ -24,6 +25,7 @@
     </Imports>
     <ConfigurationSettings>
       <Setting name="AzureStorageConnectionString" />
+      <Setting name="SqlAzureConnectionString" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

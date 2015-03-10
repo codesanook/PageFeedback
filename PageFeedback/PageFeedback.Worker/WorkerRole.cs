@@ -7,6 +7,8 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
+using PageFeedback.Service.Models;
+using PageFeedback.Service.NhSessionFactory;
 using log4net;
 
 namespace PageFeedback.Worker
@@ -15,6 +17,8 @@ namespace PageFeedback.Worker
     {
 
         private ILog _log = LogManager.GetLogger(typeof(WorkerRole));
+
+
 
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
@@ -46,7 +50,7 @@ namespace PageFeedback.Worker
             bool result = base.OnStart();
 
             Trace.TraceInformation("PageFeedback.Worker has been started");
-
+            SessionFactory.Init();
             return result;
         }
 
@@ -87,8 +91,20 @@ namespace PageFeedback.Worker
                     CloudQueueMessage retrievedMessage = queue.GetMessage();
                     if (retrievedMessage != null)
                     {
-                        _log.DebugFormat("retrievedMessage.AsString [{0}]", retrievedMessage.AsString);
+                        var fbToekn = retrievedMessage.AsString;
+                        _log.DebugFormat("retrievedMessage.AsString [{0}]", fbToekn);
 
+                        var fbQuery = new FbQuery();
+                        var comments = fbQuery.Query(fbToekn);
+                        using (var session = SessionFactory.GetCurrentSession())
+                        {
+                            foreach (var comment in comments)
+                            {
+                                session.Save(comment);
+                            }
+                            session.Flush();
+                            _log.DebugFormat("save comment count [{0}]", comments.Count);
+                        }
                         //Process the message in less than 30 seconds, and then delete the message
                         queue.DeleteMessage(retrievedMessage);
                     }

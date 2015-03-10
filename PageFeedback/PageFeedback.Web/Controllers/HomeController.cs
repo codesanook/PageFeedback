@@ -23,7 +23,7 @@ namespace PageFeedback.Web.Controllers
         //Home/PublishMessage
         public ActionResult PublishMessage()
         {
-//http://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-queues/
+            //http://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-queues/
 
             // Retrieve storage account from connection string
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
@@ -37,10 +37,24 @@ namespace PageFeedback.Web.Controllers
             // Create the queue if it doesn't already exist
             queue.CreateIfNotExists();
             // Create a message and add it to the queue.
-            CloudQueueMessage message = new CloudQueueMessage(string.Format("Hello, World at {0}",DateTime.Now));
-            queue.AddMessage(message);
 
-            return Content("published");
+            string fbToken = null;
+            if (Session["fbToken"] != null)
+            {
+                fbToken = (string)Session["fbToken"];
+            }
+
+            
+            if (string.IsNullOrEmpty(fbToken))
+            {
+                return RedirectToAction("token", "fb");
+            }
+            else
+            {
+                var message = new CloudQueueMessage(fbToken);
+                queue.AddMessage(message);
+                return Content("published");
+            }
         }
     }
 }

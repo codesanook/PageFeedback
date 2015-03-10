@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PageFeedback.Azure" generation="1" functional="0" release="0" Id="fb02180f-e43b-49f1-a782-ada5c3f7f530" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PageFeedback.Azure" generation="1" functional="0" release="0" Id="068ce04d-0da5-4db1-8604-fb352acaafbb" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="PageFeedback.AzureGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -15,6 +15,11 @@
             <mapMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/MapPageFeedback.Web:AzureStorageConnectionString" />
           </maps>
         </aCS>
+        <aCS name="PageFeedback.Web:SqlAzureConnectionString" defaultValue="">
+          <maps>
+            <mapMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/MapPageFeedback.Web:SqlAzureConnectionString" />
+          </maps>
+        </aCS>
         <aCS name="PageFeedback.WebInstances" defaultValue="[1,1,1]">
           <maps>
             <mapMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/MapPageFeedback.WebInstances" />
@@ -23,6 +28,11 @@
         <aCS name="PageFeedback.Worker:AzureStorageConnectionString" defaultValue="">
           <maps>
             <mapMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/MapPageFeedback.Worker:AzureStorageConnectionString" />
+          </maps>
+        </aCS>
+        <aCS name="PageFeedback.Worker:SqlAzureConnectionString" defaultValue="">
+          <maps>
+            <mapMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/MapPageFeedback.Worker:SqlAzureConnectionString" />
           </maps>
         </aCS>
         <aCS name="PageFeedback.WorkerInstances" defaultValue="[1,1,1]">
@@ -44,6 +54,11 @@
             <aCSMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.Web/AzureStorageConnectionString" />
           </setting>
         </map>
+        <map name="MapPageFeedback.Web:SqlAzureConnectionString" kind="Identity">
+          <setting>
+            <aCSMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.Web/SqlAzureConnectionString" />
+          </setting>
+        </map>
         <map name="MapPageFeedback.WebInstances" kind="Identity">
           <setting>
             <sCSPolicyIDMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.WebInstances" />
@@ -52,6 +67,11 @@
         <map name="MapPageFeedback.Worker:AzureStorageConnectionString" kind="Identity">
           <setting>
             <aCSMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.Worker/AzureStorageConnectionString" />
+          </setting>
+        </map>
+        <map name="MapPageFeedback.Worker:SqlAzureConnectionString" kind="Identity">
+          <setting>
+            <aCSMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.Worker/SqlAzureConnectionString" />
           </setting>
         </map>
         <map name="MapPageFeedback.WorkerInstances" kind="Identity">
@@ -68,6 +88,7 @@
             </componentports>
             <settings>
               <aCS name="AzureStorageConnectionString" defaultValue="" />
+              <aCS name="SqlAzureConnectionString" defaultValue="" />
               <aCS name="__ModelData" defaultValue="&lt;m role=&quot;PageFeedback.Web&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;PageFeedback.Web&quot;&gt;&lt;e name=&quot;Endpoint1&quot; /&gt;&lt;/r&gt;&lt;r name=&quot;PageFeedback.Worker&quot; /&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
@@ -85,6 +106,7 @@
           <role name="PageFeedback.Worker" generation="1" functional="0" release="0" software="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Azure\csx\Debug\roles\PageFeedback.Worker" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="AzureStorageConnectionString" defaultValue="" />
+              <aCS name="SqlAzureConnectionString" defaultValue="" />
               <aCS name="__ModelData" defaultValue="&lt;m role=&quot;PageFeedback.Worker&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;PageFeedback.Web&quot;&gt;&lt;e name=&quot;Endpoint1&quot; /&gt;&lt;/r&gt;&lt;r name=&quot;PageFeedback.Worker&quot; /&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
@@ -110,9 +132,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="6b87fa9a-5198-4399-a4f5-8def56ff630a" ref="Microsoft.RedDog.Contract\ServiceContract\PageFeedback.AzureContract@ServiceDefinition">
+    <implementation Id="453d3307-c88c-43ce-804f-5f83380af2b7" ref="Microsoft.RedDog.Contract\ServiceContract\PageFeedback.AzureContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="ff41532a-2f11-479e-860c-478dffba1699" ref="Microsoft.RedDog.Contract\Interface\PageFeedback.Web:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="1e3bb911-23d4-444a-b17e-97225884487f" ref="Microsoft.RedDog.Contract\Interface\PageFeedback.Web:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.Web:Endpoint1" />
           </inPort>

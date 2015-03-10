@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{DB877C
 		shared\log4net.xml = shared\log4net.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageFeedback.Service", "PageFeedback.Service\PageFeedback.Service.csproj", "{348D1A9E-7557-4F11-A847-D7E0D886EA4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{BB10BB14-669D-4435-BD8B-CBE4F69CE1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB10BB14-669D-4435-BD8B-CBE4F69CE1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB10BB14-669D-4435-BD8B-CBE4F69CE1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{348D1A9E-7557-4F11-A847-D7E0D886EA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{348D1A9E-7557-4F11-A847-D7E0D886EA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{348D1A9E-7557-4F11-A847-D7E0D886EA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{348D1A9E-7557-4F11-A847-D7E0D886EA4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
