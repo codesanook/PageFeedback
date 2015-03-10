@@ -13,9 +13,17 @@
     </Endpoints>
     <Imports>
     </Imports>
+    <LocalResources>
+    </LocalResources>
+    <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" />
+    </ConfigurationSettings>
   </WebRole>
   <WorkerRole name="PageFeedback.Worker" vmsize="ExtraSmall">
     <Imports>
     </Imports>
+    <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" />
+    </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

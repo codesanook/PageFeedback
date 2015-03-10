@@ -3,11 +3,13 @@
   <Role name="PageFeedback.Web">
     <Instances count="1" />
     <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
   <Role name="PageFeedback.Worker">
     <Instances count="1" />
     <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

@@ -4,7 +4,9 @@
     <LocalResources>
       <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
     </LocalResources>
-    <ConfigurationSettings />
+    <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" />
+    </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" localPort="80" />
     </Endpoints>
@@ -14,7 +16,9 @@
     <LocalResources>
       <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
     </LocalResources>
-    <ConfigurationSettings />
+    <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" />
+    </ConfigurationSettings>
     <Endpoints />
     <Certificates />
   </WorkerRole>

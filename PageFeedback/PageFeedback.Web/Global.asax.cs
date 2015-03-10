@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using log4net;
 
 namespace PageFeedback.Web
 {
@@ -12,8 +13,12 @@ namespace PageFeedback.Web
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
+        private ILog _log = LogManager.GetLogger(typeof(MvcApplication));
+
         protected void Application_Start()
         {
+            _log.Debug("web application started");
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

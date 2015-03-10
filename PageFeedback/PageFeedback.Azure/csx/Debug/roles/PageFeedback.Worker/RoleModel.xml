@@ -13,7 +13,7 @@
     <Property name="Configuration" value="Debug" />
     <Property name="Platform" value="AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5" />
-    <Property name="OutputDir" value="D:\projects\PageFeedback\PageFeedback\PageFeedback.Azure\obj\Debug\PageFeedback.Worker\" />
+    <Property name="OutputDir" value="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Azure\obj\Debug\PageFeedback.Worker\" />
     <Property name="EntryPoint" value="PageFeedback.Worker.dll" />
     <Property name="SourceDir" value="" />
     <Property name="SitePhysicalPath" value="" />
