@@ -21,5 +21,11 @@
     <level value="DEBUG"/>
     <appender-ref ref="FileAppenderXmlLayout"/>
   </root>
+  
+  <logger name="NHibernate">
+    <level value="ERROR"/>
+  </logger>
 
+  
+  
 </log4net>

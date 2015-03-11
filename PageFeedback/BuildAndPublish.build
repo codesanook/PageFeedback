@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<project name="Deploy" default="PublishToAzure" >
+<project name="Deploy" default="BuildAndPackage" >
 
 	<property name="service" value="PageFeedback"/>
 	<property name="storage" value="pagefeedbackstorage"/>
@@ -49,22 +49,21 @@
 	</target>
 
 	<!--depends="package"-->
-	<target name="PublishToAzure"> 
-		<!--depends="BuildAndPackage"  -->
+	<target name="publish"  >
 
 		<echo message="start publishing new deployment"/>
 		<sleep seconds="5" />
 
 		<exec program="powershell" workingdir="${project.dir}">
-			<arg value='-File "${project.dir}PublishToAzure.ps1"'/>
-			<arg value='-subscription "BizSpark"'/>
+			<arg value='-File "${project.dir}PublishCloudService.ps1"'/>
+			<arg value='-subscription "BizSpark 1111"'/>
 			<arg value='-service "${service}"'/>
 			<arg value='-storageAccount "${storage}"'/>
 			<arg value='-slot "${environment}"'/>
-			<arg value='-deploymentLabel "deployed with PowerShell at ${datetime::now()}"'/>
-			<arg value='-package "${publish.dir}PageFeedback.Azure.cspkg"'/>
+			<arg value='-deploymentLabel "deployed with PowerShell and Jenkins at ${datetime::now()}"'/>
+			<arg value='-package "${publish.dir}Noonswoon.Azure.cspkg"'/>
 			<arg value='-configuration "${publish.dir}ServiceConfiguration.Cloud.cscfg"'/>
-			<arg value='-publishSettingsFile "${project.dir}DemoAzureSubscriptionFile.publishsettings"'/>
+			<arg value='-publishSettingsFile "${project.dir}AzureSubscriptionFile.publishsettings"'/>
 		</exec>
 
 		<echo message="done publishing new deployment at ${datetime::now()}"/>
