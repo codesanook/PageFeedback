@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +9,7 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
+using PageFeedback.Service;
 using PageFeedback.Service.Models;
 using PageFeedback.Service.NhSessionFactory;
 using log4net;
@@ -91,22 +94,42 @@ namespace PageFeedback.Worker
                     CloudQueueMessage retrievedMessage = queue.GetMessage();
                     if (retrievedMessage != null)
                     {
+
                         var fbToekn = retrievedMessage.AsString;
                         _log.DebugFormat("retrievedMessage.AsString [{0}]", fbToekn);
+                        //Process the message in less than 30 seconds, and then delete the message
+                        queue.DeleteMessage(retrievedMessage);
+
 
                         var fbQuery = new FbQuery();
                         var comments = fbQuery.Query(fbToekn);
+                        var apiHelper = new ApiHelper("http://icu4jservice.azurewebsites.net");
+                        List<string[]> words = new List<string[]>();
+                        foreach (var comment in comments)
+                        {
+                            var result = apiHelper
+                                  .PostHttpForm<string[]>("icu", new IcuRequest() { sentence = comment.Message });
+                            words.Add(result);
+                        }
+                        var flattenedWord = words.SelectMany(w => w).ToArray();
+                        flattenedWord = flattenedWord.Select(w => w.Trim()).ToArray();
+
                         using (var session = SessionFactory.GetCurrentSession())
                         {
-                            foreach (var comment in comments)
+                            var query = session.CreateSQLQuery("TRUNCATE TABLE PageCommentWords");
+                            query.ExecuteUpdate();
+
+                            foreach (var word in flattenedWord)
                             {
-                                session.Save(comment);
+                                if(string.IsNullOrEmpty(word))
+                                {
+                                    continue;
+                                }
+                                session.Save(new PageCommentWord() { Word = word });
                             }
                             session.Flush();
-                            _log.DebugFormat("save comment count [{0}]", comments.Count);
+                            _log.DebugFormat("save split word count [{0}]", words.Count());
                         }
-                        //Process the message in less than 30 seconds, and then delete the message
-                        queue.DeleteMessage(retrievedMessage);
                     }
                 }
                 catch (Exception ex)
@@ -118,5 +141,11 @@ namespace PageFeedback.Worker
                 await Task.Delay(1000);
             }
         }
+    }
+
+
+    public class IcuRequest
+    {
+        public string sentence { get; set; }
     }
 }

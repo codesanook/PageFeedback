@@ -2,8 +2,8 @@
 {
     public class Comment
     {
-        public virtual int Id { get; set; }
-        public virtual string Url { get; set; }
-        public virtual string Message { get; set; }
+        public int Id { get; set; }
+        public string Url { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -18,43 +18,5 @@ namespace PageFeedback.Web.Controllers
         {
             return Content("Index");
         }
-
-
-        //Home/PublishMessage
-        public ActionResult PublishMessage()
-        {
-            //http://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-queues/
-
-            // Retrieve storage account from connection string
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("AzureStorageConnectionString"));
-
-            // Create the queue client
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            // Retrieve a reference to a queue
-            CloudQueue queue = queueClient.GetQueueReference("fbqueryrequest");
-
-            // Create the queue if it doesn't already exist
-            queue.CreateIfNotExists();
-            // Create a message and add it to the queue.
-
-            string fbToken = null;
-            if (Session["fbToken"] != null)
-            {
-                fbToken = (string)Session["fbToken"];
-            }
-
-            
-            if (string.IsNullOrEmpty(fbToken))
-            {
-                return RedirectToAction("token", "fb");
-            }
-            else
-            {
-                var message = new CloudQueueMessage(fbToken);
-                queue.AddMessage(message);
-                return Content("published");
-            }
-        }
     }
 }

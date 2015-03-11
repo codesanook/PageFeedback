@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using PageFeedback.Service.NhSessionFactory;
 using log4net;
 
 namespace PageFeedback.Web
@@ -24,6 +25,7 @@ namespace PageFeedback.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            SessionFactory.Init();
         }
     }
 }

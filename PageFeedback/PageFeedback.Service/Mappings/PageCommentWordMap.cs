@@ -7,14 +7,13 @@ using PageFeedback.Service.Models;
 
 namespace PageFeedback.Service.Mappings
 {
-    public class CommentMap : ClassMap<Comment>
+    public class PageCommentWordMap : ClassMap<PageCommentWord>
     {
-        public CommentMap()
+        public PageCommentWordMap()
         {
-            Table("Comments");
+            Table("PageCommentWords");
             Id(x => x.Id).GeneratedBy.Identity();
-            Map(x => x.Url).Length(40000).Not.Nullable();
-            Map(x => x.Message).Length(40000).Not.Nullable();
+            Map(x => x.Word).Length(255).Not.Nullable();
         }
     }
 }

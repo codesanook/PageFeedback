@@ -43,9 +43,9 @@ namespace PageFeedback.Service.NhSessionFactory
                     .Database(dbConfig)
                     .Mappings(m =>
                     {
-                        m.FluentMappings.AddFromAssemblyOf<CommentMap>();
+                        m.FluentMappings.AddFromAssemblyOf<PageCommentWordMap>();
                         //to se name query in xml file
-                        m.HbmMappings.AddFromAssemblyOf<CommentMap>();
+                        m.HbmMappings.AddFromAssemblyOf<PageCommentWordMap>();
                     })
                     .ExposeConfiguration(TreatConfiguration)
                     .BuildConfiguration();
