@@ -13,14 +13,14 @@
     <Property name="Configuration" value="Debug" />
     <Property name="Platform" value="AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5" />
-    <Property name="OutputDir" value="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Azure\obj\Debug\PageFeedback.Web\" />
+    <Property name="OutputDir" value="C:\Work\PageFeedback\PageFeedback\PageFeedback.Azure\obj\Debug\PageFeedback.Web\" />
     <Property name="EntryPoint" value="PageFeedback.Web.dll" />
-    <Property name="SourceDir" value="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Web\" />
-    <Property name="SitePhysicalPath" value="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Web\" />
+    <Property name="SourceDir" value="C:\Work\PageFeedback\PageFeedback\PageFeedback.Web\" />
+    <Property name="SitePhysicalPath" value="C:\Work\PageFeedback\PageFeedback\PageFeedback.Web\" />
     <Property name="TargetRuntimeVersion" value="v4.0" />
   </Properties>
   <Sites>
-    <Site name="Web" physicalDirectory="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Web\">
+    <Site name="Web" physicalDirectory="C:\Work\PageFeedback\PageFeedback\PageFeedback.Web\">
       <Bindings>
         <Binding name="Endpoint1" endpointName="Endpoint1" />
       </Bindings>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PageFeedback.Azure" generation="1" functional="0" release="0" Id="6711504c-ccf7-4ef9-9c20-625ea13f27a4" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PageFeedback.Azure" generation="1" functional="0" release="0" Id="320834a5-1200-455f-b767-10302c07891a" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="PageFeedback.AzureGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -82,7 +82,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="PageFeedback.Web" generation="1" functional="0" release="0" software="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Azure\csx\Debug\roles\PageFeedback.Web" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="PageFeedback.Web" generation="1" functional="0" release="0" software="C:\Work\PageFeedback\PageFeedback\PageFeedback.Azure\csx\Debug\roles\PageFeedback.Web" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
             </componentports>
@@ -103,7 +103,7 @@
           </sCSPolicy>
         </groupHascomponents>
         <groupHascomponents>
-          <role name="PageFeedback.Worker" generation="1" functional="0" release="0" software="C:\Learning\PageFeedback\PageFeedback\PageFeedback.Azure\csx\Debug\roles\PageFeedback.Worker" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="PageFeedback.Worker" generation="1" functional="0" release="0" software="C:\Work\PageFeedback\PageFeedback\PageFeedback.Azure\csx\Debug\roles\PageFeedback.Worker" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="AzureStorageConnectionString" defaultValue="" />
               <aCS name="SqlAzureConnectionString" defaultValue="" />
@@ -132,9 +132,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="25006831-1b05-4da0-baf0-7d7ec38c5f81" ref="Microsoft.RedDog.Contract\ServiceContract\PageFeedback.AzureContract@ServiceDefinition">
+    <implementation Id="71ec83fb-2fcf-4fd6-8b37-40daf7e6dd3b" ref="Microsoft.RedDog.Contract\ServiceContract\PageFeedback.AzureContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="e58f7bdf-094c-4469-aef9-f21b48a00b77" ref="Microsoft.RedDog.Contract\Interface\PageFeedback.Web:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="9ec9a86b-890d-4ce6-b099-243fbad20a25" ref="Microsoft.RedDog.Contract\Interface\PageFeedback.Web:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/PageFeedback.Azure/PageFeedback.AzureGroup/PageFeedback.Web:Endpoint1" />
           </inPort>
