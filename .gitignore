@@ -14,3 +14,5 @@ icuService/.settings/*
 RemoteSystemsTempFiles/*
 .metadata/*
 PageFeedback/DemoAzureSubscriptionFile.publishsettings
+rcf
+csx
