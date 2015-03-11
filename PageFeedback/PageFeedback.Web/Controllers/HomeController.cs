@@ -16,7 +16,7 @@ namespace PageFeedback.Web.Controllers
 
         public ActionResult Index()
         {
-            return Content("Index");
+            return View();
         }
     }
 }
