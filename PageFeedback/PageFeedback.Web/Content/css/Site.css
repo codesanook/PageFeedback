@@ -1,20 +1,52 @@
-body,header {
-    margin: 0;
-    padding: 0;
-}
 body {
-    background: url('../images/bg-body.jpg') no-repeat center center;
-    background-size: 100% 100%;
+    background-color:#008a00;
+    overflow-x:hidden;
 }
-header {
-    background-color: rgba(0,0,0,0.3);
-    padding:20px;
-    color:white;
-    text-align:center;
+.tile-content h2 {
+    margin-top: 40px;
 }
-.metro header h1{
-    color:white;
+
+
+/*------------------------------Card Flip--------------------------------------*/
+
+.flip {
+    background-color:#0f6b3a;
+    -webkit-perspective: 800;
+    position: relative;
 }
-#main {
-    padding: 20px;
-}
+
+    .flip .card.flipped {
+        transform: /*translateX( -100% )*/ rotateY( 180deg );
+        -webkit-transform:/* translateX( -100% )*/ rotateY( 180deg );
+    }
+
+    .flip .card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        /*transform-origin: right center;*/
+        transform-style: preserve-3d;
+        transition: 1s;
+        -webkit-transform-origin: right center;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition: 1s;
+        
+    }
+
+        .flip .card .face {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .flip .card .back {
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            background-color:white;
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }

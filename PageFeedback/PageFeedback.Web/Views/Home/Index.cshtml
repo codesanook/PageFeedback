@@ -1,21 +1,40 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Page Feedback</title>
-    <link href="~/Content/css/metro-bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/css/Site.css" rel="stylesheet" />
-    <script src="~/Content/js/jquery-2.1.3.min.js"></script>
-    <script src="~/Content/js/jquery.widget.min.js"></script>
-    <script src="~/Content/js/metro.min.js"></script>
-    <script>
+    <meta charset="utf-8">
+    <meta name="product" content="Page Feedback">
+    <meta name="keywords" content="Page Feedback">
+    <meta name="description" content="Page Feedback">
+    <meta name="author" content="Theeranit Pongtongmueng">
 
+    <link href="/content/css/metro-bootstrap.css" rel="stylesheet">
+    <link href="/content/css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="/content/css/iconFont.css" rel="stylesheet">
+    <link href="/content/css/docs.css" rel="stylesheet">
+    <link href="/content/js/prettify/prettify.css" rel="stylesheet">
+    <link href="/content/css/Site.css" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script src="/content/js/jquery/jquery.min.js"></script>
+    <script src="/content/js/jquery/jquery.widget.min.js"></script>
+    <script src="/content/js/jquery/jquery.mousewheel.js"></script>
+    <script src="/content/js/prettify/prettify.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="/content/js/load-metro.js"></script>
+
+    <!-- Local JavaScript -->
+    <script src="/content/js/docs.js"></script>
+    <script src="/content/js/github.info.js"></script>
+    <script src="/content/js/start-screen.js"></script>
+    <script>
         var fbAppId = 161236587286870;
         var facebookPermissionScopes = [];
 
         facebookPermissionScopes = facebookPermissionScopes.join(",");
         console.log("facebookPermissionScopes: %s", facebookPermissionScopes);
 
-        $(document).ready(function () {          
+        $(document).ready(function () {
 
             $(document).on('gotFbToken', function (e, fb) {
                 var fbId = fb.uid;
@@ -24,8 +43,19 @@
                 var jsonData = JSON.stringify({ fbToken: fbToken });
                 var successCallback = function (result) {
                     console.log(result);
-                    //alert("got new FbToken");
-                    $('#token h1').text('Token Valid !').css({'font-size':'28px'});
+                    $.Dialog({
+                        shadow: true,
+                        overlay: false,
+                        icon: '<span class="icon-checkmark"></span>',
+                        title: 'Get Token',
+                        width: 500,
+                        padding: 10,
+                        content: 'Token Valid !!'
+                    });
+                    $('#token .card').addClass('flipped');
+                    setTimeout(function () {
+                        $('#token .card').removeClass('flipped');
+                    }, 3500);
                 };
 
                 var errorCallback = function (result) {
@@ -45,7 +75,19 @@
 
             $('#publish').click(function () {
                 var successCallback = function (result) {
-                    $('#publish h1').text('Publish !!!').css({ 'font-size': '28px' });
+                    $.Dialog({
+                        shadow: true,
+                        overlay: false,
+                        icon: '<span class="icon-broadcast"></span>',
+                        title: 'Publish',
+                        width: 500,
+                        padding: 10,
+                        content: 'Published Already !!'
+                    });
+                    $('#publish .card').addClass('flipped');
+                    setTimeout(function () {
+                        $('#publish .card').removeClass('flipped');
+                    }, 3500);
                 };
 
                 var errorCallback = function (result) {
@@ -60,7 +102,7 @@
                     error: errorCallback,
                     async: false
                 });
-            });            
+            });
 
             $(document).on('fbLoaded', function () {
                 console.log('fbLoaded called');
@@ -117,7 +159,9 @@
 
             });
         });
+
     </script>
+    <title>Page Feedback</title>
 </head>
 <body class="metro">
     <div id="fb-root"></div>
@@ -139,44 +183,352 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
-    <header>
-        <h1>Page Feedback</h1>
-    </header>
-    <div id="main" class="contanier-fluid">
-
-        <div class="tile">
-            <div class="tile-content image">
-                <img src="/content/images/author.jpg">
+    <div class="tile-area bg-emerald">
+        <h1 class="tile-area-title fg-white">Start</h1>
+        <div class="user-id">
+            <div class="user-id-image">
+                <img src="/content/images/mm-amm.jpg">
             </div>
-            <div class="brand">
-                <span class="label fg-white">Theeranit</span>
+            <div class="user-id-name">
+                <span class="first-name">Amm</span>
+                <span class="last-name">Theeranit</span>
             </div>
         </div>
 
+        <div class="tile-group six">
 
-        <div id="token" class="tile double bg-green">
-            <div class="tile-content icon">
-                <h1 style="color: white; text-align: center;">Token</h1>
+            <a class="tile double bg-darkOrange live" data-role="live-tile" data-effect="slideUp" data-click="transform">
+                <div class="tile-content email">
+                    <div class="email-image">
+                        <img src="/content/images/mm-mickey.jpg">
+                    </div>
+                    <div class="email-data">
+                        <span class="email-data-title">Mickey Kavin</span>
+                        <span class="email-data-subtitle">You're invited</span>
+                        <span class="email-data-text">I hope that you can make and make</span>
+                    </div>
+                </div>
+                <div class="tile-content email">
+                    <div class="email-image">
+                        <img src="/content/images/mm-bam.jpg">
+                    </div>
+                    <div class="email-data">
+                        <span class="email-data-title">Bam Nitirinya</span>
+                        <span class="email-data-subtitle">You're invited</span>
+                        <span class="email-data-text">I hope that you can make and make</span>
+                    </div>
+                </div>
+                <div class="tile-content email">
+                    <div class="email-image">
+                        <img src="/content/images/mm-you.jpg">
+                    </div>
+                    <div class="email-data">
+                        <span class="email-data-title">You Saranyu</span>
+                        <span class="email-data-subtitle">You're invited</span>
+                        <span class="email-data-text">I hope that you can make and make</span>
+                    </div>
+                </div>
+                <div class="brand">
+                    <div class="label">
+                        <h3 class="no-margin fg-white"><span class="icon-mail"></span></h3>
+                    </div>
+                    <div class="badge">3</div>
+                </div>
+            </a>
+            <!-- end tile -->
+
+            <a class="tile double bg-violet" data-click="transform">
+                <div class="tile-content">
+                    <div class="text-right padding10 ntp">
+                        <h1 class="fg-white no-margin">14</h1>
+                        <p class="fg-white">Saturday</p>
+                    </div>
+                </div>
+                <div class="brand">
+                    <div class="label">
+                        <h3 class="no-margin fg-white"><span class="icon-calendar"></span></h3>
+                    </div>
+                </div>
+            </a>
+            <!-- end tile -->
+
+            <!--<div class="tile" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/clouds.jpg">
+                </div>
+                <div class="brand">
+                    <div class="label fg-amber">Photos</div>
+                </div>
+            </div> <!-- end tile --
+
+            <!-- small tiles --
+            <a href="#" class="tile half bg-darkRed" data-click="transform">
+                <div class="tile-content icon">
+                    <span class="icon-camera"></span>
+                </div>
+            </a>
+
+            <a href="#" class="tile half bg-darkOrange" data-click="transform">
+                <div class="tile-content icon">
+                    <span class="icon-headphones"></span>
+                </div>
+            </a>
+
+            <a href="#" class="tile half bg-green" data-click="transform">
+                <div class="tile-content icon">
+                    <span class="icon-steering-wheel"></span>
+                </div>
+            </a>
+
+            <a href="#" class="tile half bg-darkPink" data-click="transform">
+                <div class="tile-content icon">
+                    <span class="icon-pictures"></span>
+                </div>
+            </a>
+            <!-- end small tiles -->
+            <div id="token" class="tile double bg-emerald flip" data-click="transform">
+                <div class="card">
+                    <div class="face front">
+                        <a class="tile double bg-cyan" >
+                            <div class="tile-content">
+                                <h2 class="text-center fg-white">Get Token</h2>
+                            </div>
+                            <div class="brand">
+                                <div class="label">Get Token</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="face back">
+                        <a class="tile double bg-cobalt">
+                            <div class="tile-content">
+                                <h2 class="text-center fg-white">Token Valid !!</h2>
+                            </div>
+                            <div class="brand">
+                                <div class="label">Get Token</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="tile-status">
-                <span class="name">Token</span>
+
+
+            <a class="tile double double-vertical bg-steel" data-click="transform">
+                <div class="tile-content" style="background: url(/content/images/clouds2.png)">
+                    <div class="padding10">
+                        <h1 class="fg-white ntm">32&deg;c</h1>
+                        <h2 class="fg-white no-margin">Bangkok</h2>
+                        <h5 class="fg-white no-margin">Party Cloudy</h5>
+                        <p class="tertiary-text fg-white no-margin">Today</p>
+                        <p class="tertiary-text fg-white">35&deg;c/28&deg;c Mostly Clear</p>
+                        <p class="tertiary-text fg-white no-margin">Tomorrow</p>
+                        <p class="tertiary-text fg-white">36&deg;c/29&deg;c Mostly Clear</p>
+                    </div>
+
+                </div>
+                <div class="tile-status">
+                    <div class="label">Weather</div>
+                </div>
+            </a>
+            <!-- end tile -->
+
+            <div class="tile double" data-click="transform">
+                <div class="tile-content image-set">
+                    <img src="/content/images/mm-amm.jpg">
+                    <img src="/content/images/mm-mickey.jpg">
+                    <img src="/content/images/mm-bam.jpg">
+                    <img src="/content/images/mm-mod.jpg">
+                    <img src="/content/images/mm-you.jpg">
+                </div>
+            </div>
+            <!-- end tile -->
+
+            <!--<a href="#" class="tile bg-lightBlue" data-click="transform">
+                <div class="tile-content icon">
+                    <span class="icon-IE"></span>
+                </div>
+                <div class="brand">
+                    <div class="label">Internet Explorer</div>
+                </div>
+            </a>
+
+            <a href="#" class="tile bg-darkOrange" data-click="transform">
+                <div class="tile-content icon">
+                    <span class="icon-help"></span>
+                </div>
+                <div class="brand">
+                    <div class="label">Help+Tips</div>
+                </div>
+            </a>-->
+
+             <div id="publish" class="tile double bg-emerald flip" data-click="transform">
+                <div class="card">
+                    <div class="face front">
+                        <a class="tile double bg-magenta">
+                <div class="tile-content">
+                    <h2 class="text-center fg-white">Publish</h2>
+                </div>
+                <div class="brand">
+                    <div class="label">Publish</div>
+                </div>
+            </a>
+                    </div>
+                    <div class="face back">
+                        <a class="tile double bg-crimson">
+                            <div class="tile-content">
+                                <h2 class="text-center fg-white">Published Already !!</h2>
+                            </div>
+                            <div class="brand">
+                                <div class="label">Publish</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!--<a class="tile double bg-lightBlue" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/windows_8_default_13_wallpaper.jpg">
+                </div>
+                <div class="brand">
+                    <div class="label">Desktop</div>
+                </div>
+            </a>-->
+
+            <div class="tile" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-ns.jpg">
+                </div>
+                <div class="brand">
+                    <div class="label">Noonswoon</div>
+                </div>
+            </div>
+            <!-- end tile -->
+
+            <div class="tile" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-azure.jpg">
+                </div>
+                <div class="brand">
+                    <div class="label">Microsoft Azure</div>
+                </div>
+            </div>
+            <!-- end tile -->
+
+            <a id="summary" class="tile double bg-darkGreen" data-click="transform">
+                <div class="tile-content">
+                    <h2 class="text-center fg-white">Summary</h2>
+                </div>
+                <div class="brand">
+                    <div class="label">Summary</div>
+                </div>
+            </a>
+        </div>
+        <!-- End group -->
+
+        <div class="tile-group one">
+            <div class="tile-group-title">MS Azure</div>
+            <a class="tile half" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-dotnet.jpg">
+                </div>
+            </a>
+            <a class="tile half" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-java.jpg">
+                </div>
+            </a>
+            <a class="tile half" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-ruby.jpg">
+                </div>
+            </a>
+            <a class="tile half" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-php.jpg">
+                </div>
+            </a>
+            <a class="tile half" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-nodejs.jpg">
+                </div>
+            </a>
+            <a class="tile half" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-python.jpg">
+                </div>
+            </a>
+        </div>
+        <!-- End tile group -->
+
+        <div class="tile-group double">
+            <div class="tile-group-title">Games</div>
+            <div class="tile bg-dark" data-click="transform">
+                <div class="tile-content icon">
+                    <img src="/content/images/Crysis-2-icon.png">
+                </div>
+                <div class="brand">
+                    <div class="label">Crysis 2</div>
+                </div>
+            </div>
+            <div class="tile bg-dark" data-click="transform">
+                <div class="tile-content icon">
+                    <img src="/content/images/Battlefield_4_Icon.png">
+                </div>
+                <div class="brand">
+                    <div class="label">Battlefield 4</div>
+                </div>
+            </div>
+            <div class="tile bg-dark" data-click="transform">
+                <div class="tile-content icon">
+                    <img src="/content/images/D3.png">
+                </div>
+                <div class="brand">
+                    <div class="label">Diablo III</div>
+                </div>
+            </div>
+            <div class="tile bg-dark" data-click="transform">
+                <div class="tile-content icon">
+                    <img src="/content/images/grid2.png">
+                </div>
+                <div class="brand">
+                    <div class="label">Grid 2</div>
+                </div>
             </div>
         </div>
+        <!-- End group -->
 
-        <div id="publish" class="tile double bg-blue">
-            <div class="tile-content icon">
-                <h1 style="color: white; text-align: center;">Publish</h1>
+        <div class="tile-group double">
+            <div class="tile double" data-click="transform">
+                <div class="tile-content image-set">
+                    <img src="/content/images/1.jpg">
+                    <img src="/content/images/2.jpg">
+                    <img src="/content/images/3.jpg">
+                    <img src="/content/images/4.jpg">
+                    <img src="/content/images/5.jpg">
+                </div>
             </div>
-            <div class="tile-status">
-                <span class="name">Publish</span>
-            </div>
-        </div>
-        <div id="summary" class="tile double bg-red">
-            <div class="tile-content icon">
-                <h1 style="color: white; text-align: center;">Summary</h1>
-            </div>
-            <div class="tile-status">
-                <span class="name">Summary</span>
+            <div class="tile double live" data-role="live-tile" data-effect="slideUpDown" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="/content/images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="/content/images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="/content/images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="/content/images/5.jpg">
+                </div>
+
+                <div class="tile-status">
+                    <span class="label">Images</span>
+                </div>
             </div>
         </div>
     </div>
