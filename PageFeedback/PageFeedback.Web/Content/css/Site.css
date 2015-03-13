@@ -15,7 +15,7 @@ body {
     position: relative;
 }
 
-    .flip .card.flipped {
+    .flip .card.flipped, .word.flip .card:hover {
         transform: /*translateX( -100% )*/ rotateY( 180deg );
         -webkit-transform:/* translateX( -100% )*/ rotateY( 180deg );
     }

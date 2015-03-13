@@ -19,6 +19,8 @@
     <script src="/content/js/jquery/jquery.widget.min.js"></script>
     <script src="/content/js/jquery/jquery.mousewheel.js"></script>
     <script src="/content/js/prettify/prettify.js"></script>
+    <script src="/Content/js/knockout/knockout-3.2.0.js"></script>
+    <script src="/Content/js/knockout/knockout.mapping-latest.js"></script>
 
     <!-- Metro UI CSS JavaScript plugins -->
     <script src="/content/js/load-metro.js"></script>
@@ -27,140 +29,8 @@
     <script src="/content/js/docs.js"></script>
     <script src="/content/js/github.info.js"></script>
     <script src="/content/js/start-screen.js"></script>
-    <script>
-        var fbAppId = 161236587286870;
-        var facebookPermissionScopes = [];
+    <script src="/content/js/Site.js"></script>
 
-        facebookPermissionScopes = facebookPermissionScopes.join(",");
-        console.log("facebookPermissionScopes: %s", facebookPermissionScopes);
-
-        $(document).ready(function () {
-
-            $(document).on('gotFbToken', function (e, fb) {
-                var fbId = fb.uid;
-                var fbToken = fb.token;
-
-                var jsonData = JSON.stringify({ fbToken: fbToken });
-                var successCallback = function (result) {
-                    console.log(result);
-                    $.Dialog({
-                        shadow: true,
-                        overlay: false,
-                        icon: '<span class="icon-checkmark"></span>',
-                        title: 'Get Token',
-                        width: 500,
-                        padding: 10,
-                        content: 'Token Valid !!'
-                    });
-                    $('#token .card').addClass('flipped');
-                    setTimeout(function () {
-                        $('#token .card').removeClass('flipped');
-                    }, 3500);
-                };
-
-                var errorCallback = function (result) {
-                    console.log(result);
-                    alert("error FbToken");
-                };
-
-                $.ajax({
-                    url: "/fb/token",
-                    data: jsonData,
-                    type: 'POST',
-                    success: successCallback,
-                    error: errorCallback,
-                    async: false
-                });
-            });
-
-            $('#publish').click(function () {
-                var successCallback = function (result) {
-                    $.Dialog({
-                        shadow: true,
-                        overlay: false,
-                        icon: '<span class="icon-broadcast"></span>',
-                        title: 'Publish',
-                        width: 500,
-                        padding: 10,
-                        content: 'Published Already !!'
-                    });
-                    $('#publish .card').addClass('flipped');
-                    setTimeout(function () {
-                        $('#publish .card').removeClass('flipped');
-                    }, 3500);
-                };
-
-                var errorCallback = function (result) {
-                    console.log(result);
-                    alert("error publish");
-                };
-
-                $.ajax({
-                    url: "/fb/publishmessage",
-                    type: 'GET',
-                    success: successCallback,
-                    error: errorCallback,
-                    async: false
-                });
-            });
-
-            $(document).on('fbLoaded', function () {
-                console.log('fbLoaded called');
-
-                FB.getLoginStatus(function (response) {
-                    if (response.status === 'connected') {
-
-                        console.log('User connected and authorize');
-                        var uid = response.authResponse.userID;
-                        var accessToken = response.authResponse.accessToken;
-
-                        $(document).trigger('gotFbToken', [{ uid: uid, token: accessToken }]);
-
-                    } else if (response.status === 'not_authorized') {
-                        // the user is logged in to Facebook, but has not authenticated your app
-                        console.log('User connected but not authorize');
-                        try {
-                            FB.logout(function (response) {
-                                // user is now logged out
-                                console.log('User log out');
-                                FB.login(logInFacebookCallback, {
-                                    scope: facebookPermissionScopes,
-                                    return_scopes: true
-                                });
-                            });
-                        } catch (err) {
-                            console.log(err);
-                        }
-
-
-                    } else {
-                        // the user isn't logged in to Facebook.
-                        console.log('User log in first time');
-                        try {
-                            FB.login(logInFacebookCallback, {
-                                scope: facebookPermissionScopes,
-                                return_scopes: true
-                            });
-                        } catch (err) {
-                            console.log(err);
-                        }
-                    }
-                });
-
-                function logInFacebookCallback(response) {
-                    if (!response.authResponse) {
-                        console.log(response.authResponse);
-                        return;
-                    }
-                    var accessToken = response.authResponse.accessToken;
-                    var uid = response.authResponse.userID;
-                    $(document).trigger('gotFbToken', [{ uid: uid, token: accessToken }]);
-                }
-
-            });
-        });
-
-    </script>
     <title>Page Feedback</title>
 </head>
 <body class="metro">
@@ -289,7 +159,7 @@
             <div id="token" class="tile double bg-emerald flip" data-click="transform">
                 <div class="card">
                     <div class="face front">
-                        <a class="tile double bg-cyan" >
+                        <a class="tile double bg-cyan">
                             <div class="tile-content">
                                 <h2 class="text-center fg-white">Get Token</h2>
                             </div>
@@ -312,7 +182,7 @@
             </div>
 
 
-            <a class="tile double double-vertical bg-steel" data-click="transform">
+            <!--<a class="tile double double-vertical bg-steel" data-click="transform">
                 <div class="tile-content" style="background: url(/content/images/clouds2.png)">
                     <div class="padding10">
                         <h1 class="fg-white ntm">32&deg;c</h1>
@@ -329,6 +199,16 @@
                     <div class="label">Weather</div>
                 </div>
             </a>
+            <!-- end tile -->
+
+            <div class="tile double double-vertical" data-click="transform">
+                <div class="tile-content image">
+                    <img src="/content/images/logo-azure.jpg">
+                </div>
+                <div class="brand">
+                    <div class="label">Microsoft Azure</div>
+                </div>
+            </div>
             <!-- end tile -->
 
             <div class="tile double" data-click="transform">
@@ -360,20 +240,20 @@
                 </div>
             </a>-->
 
-             <div id="publish" class="tile double bg-emerald flip" data-click="transform">
+            <div id="publish" class="tile double bg-emerald flip" data-click="transform">
                 <div class="card">
                     <div class="face front">
-                        <a class="tile double bg-magenta">
-                <div class="tile-content">
-                    <h2 class="text-center fg-white">Publish</h2>
-                </div>
-                <div class="brand">
-                    <div class="label">Publish</div>
-                </div>
-            </a>
+                        <a class="tile double bg-amber">
+                            <div class="tile-content">
+                                <h2 class="text-center fg-white">Publish</h2>
+                            </div>
+                            <div class="brand">
+                                <div class="label">Publish</div>
+                            </div>
+                        </a>
                     </div>
                     <div class="face back">
-                        <a class="tile double bg-crimson">
+                        <a class="tile double bg-orange">
                             <div class="tile-content">
                                 <h2 class="text-center fg-white">Published Already !!</h2>
                             </div>
@@ -385,7 +265,7 @@
                 </div>
             </div>
 
-            
+
 
             <!--<a class="tile double bg-lightBlue" data-click="transform">
                 <div class="tile-content image">
@@ -408,15 +288,15 @@
 
             <div class="tile" data-click="transform">
                 <div class="tile-content image">
-                    <img src="/content/images/logo-azure.jpg">
+                    <img src="/content/images/logo-codesanook.jpg">
                 </div>
                 <div class="brand">
-                    <div class="label">Microsoft Azure</div>
+                    <div class="label">CodeSanook</div>
                 </div>
             </div>
             <!-- end tile -->
 
-            <a id="summary" class="tile double bg-darkGreen" data-click="transform">
+            <a id="summary" class="tile double bg-magenta" data-click="transform">
                 <div class="tile-content">
                     <h2 class="text-center fg-white">Summary</h2>
                 </div>
@@ -462,44 +342,34 @@
         </div>
         <!-- End tile group -->
 
-        <div class="tile-group double">
-            <div class="tile-group-title">Games</div>
-            <div class="tile bg-dark" data-click="transform">
-                <div class="tile-content icon">
-                    <img src="/content/images/Crysis-2-icon.png">
-                </div>
-                <div class="brand">
-                    <div class="label">Crysis 2</div>
-                </div>
-            </div>
-            <div class="tile bg-dark" data-click="transform">
-                <div class="tile-content icon">
-                    <img src="/content/images/Battlefield_4_Icon.png">
-                </div>
-                <div class="brand">
-                    <div class="label">Battlefield 4</div>
-                </div>
-            </div>
-            <div class="tile bg-dark" data-click="transform">
-                <div class="tile-content icon">
-                    <img src="/content/images/D3.png">
-                </div>
-                <div class="brand">
-                    <div class="label">Diablo III</div>
+        <div class="tile-group six">
+            <div class="tile-group-title">Summary</div>
+
+            <div data-bind="foreach: words()">
+                <div class="word tile bg-emerald flip" data-click="transform">
+                    <div class="card">
+                        <div class="face front">
+                            <a class="tile bg-magenta">
+                                <div class="tile-content">
+                                    <h2 class="text-center fg-white" data-bind="text: Word">Summary</h2>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="face back">
+                            <a class="tile bg-crimson">
+                                <div class="tile-content">
+                                    <h2 class="text-center fg-white" data-bind="text: WordCount">Frequency</h2>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="tile bg-dark" data-click="transform">
-                <div class="tile-content icon">
-                    <img src="/content/images/grid2.png">
-                </div>
-                <div class="brand">
-                    <div class="label">Grid 2</div>
-                </div>
-            </div>
+
         </div>
         <!-- End group -->
 
-        <div class="tile-group double">
+        <!--<div class="tile-group double">
             <div class="tile double" data-click="transform">
                 <div class="tile-content image-set">
                     <img src="/content/images/1.jpg">
@@ -530,7 +400,7 @@
                     <span class="label">Images</span>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </body>
 </html>

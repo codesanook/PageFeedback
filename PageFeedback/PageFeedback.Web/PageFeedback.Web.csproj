@@ -180,6 +180,7 @@
     <Content Include="Content\images\jeki_chan.jpg" />
     <Content Include="Content\images\jek_vorobey.jpg" />
     <Content Include="Content\images\jolie.jpg" />
+    <Content Include="Content\images\logo-codesanook.jpg" />
     <Content Include="Content\images\logo-dotnet.jpg" />
     <Content Include="Content\images\logo-java.jpg" />
     <Content Include="Content\images\logo-nodejs.jpg" />
@@ -200,6 +201,9 @@
     <Content Include="Content\images\shvarcenegger.jpg" />
     <Content Include="Content\images\windows_8_default_13_wallpaper.jpg" />
     <Content Include="Content\images\word.png" />
+    <Content Include="Content\js\knockout\knockout-3.2.0.js" />
+    <Content Include="Content\js\knockout\knockout.mapping-latest.js" />
+    <Content Include="Content\js\Site.js" />
     <Content Include="Content\js\jquery\jquery.min.js" />
     <Content Include="Content\js\metro.min.js" />
     <Content Include="Content\js\metro\metro-loader.js" />
@@ -233,7 +237,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
