@@ -11,10 +11,17 @@
 <ServiceConfiguration serviceName="PageFeedback.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
   <Role name="PageFeedback.Web">
     <Instances count="1" />
-    <ConfigurationSettings></ConfigurationSettings>
+    <ConfigurationSettings>
+      <Setting name="AzureStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=pagefeedbackstorage;AccountKey=BDVWoRdTPyvFeGvM42yzU9s1PVTR3D2FcghKMweyiCx0YH93KQK41kMRJkXnGBSPHNIYy+YxGQpjaBIjZXWK5w==" />
+      <Setting name="SqlAzureConnectionString" value="Server=tcp:kebye4rsuu.database.windows.net,1433;Database=PageFeedbackDb;User ID=PageFeedbackDbSa@kebye4rsuu;Password=startup$1;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+    </ConfigurationSettings>
   </Role>
   <Role name="PageFeedback.Worker">
     <Instances count="1" />
-    <ConfigurationSettings></ConfigurationSettings>
+    <ConfigurationSettings>
+      <!--<Setting name="AzureStorageConnectionString" value="UseDevelopmentStorage=true" />-->
+      <Setting name="AzureStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=pagefeedbackstorage;AccountKey=BDVWoRdTPyvFeGvM42yzU9s1PVTR3D2FcghKMweyiCx0YH93KQK41kMRJkXnGBSPHNIYy+YxGQpjaBIjZXWK5w==" />
+      <Setting name="SqlAzureConnectionString" value="Server=tcp:kebye4rsuu.database.windows.net,1433;Database=PageFeedbackDb;User ID=PageFeedbackDbSa@kebye4rsuu;Password=startup$1;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+    </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

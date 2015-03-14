@@ -26,6 +26,12 @@
     <level value="ERROR"/>
   </logger>
 
-  
-  
+
+  <logger name="NHibernate.SQL">
+    <level value="ERROR" />
+  </logger>
+  <logger name="NHibernate">
+    <level value="ERROR" />
+  </logger>
+
 </log4net>

@@ -1,4 +1,3 @@
-var fbAppId = 161236587286870;
 var facebookPermissionScopes = [];
 
 facebookPermissionScopes = facebookPermissionScopes.join(",");
@@ -10,7 +9,9 @@ $(document).ready(function () {
         var fbId = fb.uid;
         var fbToken = fb.token;
 
-        var jsonData = JSON.stringify({ fbToken: fbToken });
+        //var jsonData = JSON.stringify({ fbToken: fbToken });
+
+        var jsonData = { fbToken: fbToken };
         var successCallback = function (result) {
             console.log(result);
             $.Dialog({

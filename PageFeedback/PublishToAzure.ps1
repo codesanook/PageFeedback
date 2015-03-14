@@ -22,20 +22,17 @@ Write-Output "DeploymentLabel: $deploymentLabel"
 
 Write-Output "Running Azure Imports"
 
-<#$aImport-Module "C:\Program Files (x86)\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1"#>
+<#
+for older version of Azure PowerShell
+Import-Module "C:\Program Files (x86)\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1"#>
 #new Azure SDK 2.4 change Azure.psd1 to new folder to Load Commandlet Azure to PowerShell
 Import-Module "C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1"
 Import-AzurePublishSettingsFile -PublishSettingsFile $publishSettingsFile
 
-<#
-Set-AzureSubscription -SubscriptionName $subscription -CurrentStorageAccountName $storageAccount #-SubscriptionId a06178ed-b93f-4efc-9d12-20489f287e3f
-#>
-
 Set-AzureSubscription -SubscriptionName $subscription -CurrentStorageAccountName $storageAccount 
 Select-AzureSubscription -SubscriptionName $subscription
 
-#New-AzureStorageAccount -Location "Southeast Asia" -StorageAccountName "noodevstorageaccount"
-
+# to create azure storage New-AzureStorageAccount -Location "" -StorageAccountName ""
 
 Set-AzureService -ServiceName $service -Label $deploymentLabel
  

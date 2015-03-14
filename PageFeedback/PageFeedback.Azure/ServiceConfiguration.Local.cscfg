@@ -4,14 +4,16 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="AzureStorageConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="SqlAzureConnectionString" value="Server=tcp:kebye4rsuu.database.windows.net,1433;Database=PageFeedbackDb;User ID=PageFeedbackDbSa@kebye4rsuu;Password=startup$1;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+      <Setting name="SqlAzureConnectionString" value="Data Source=.\SQLEXPRESS;Database=PageFeedbackDb;Integrated Security=True;" />
+      <Setting name="FbAppId" value="" />
     </ConfigurationSettings>
   </Role>
   <Role name="PageFeedback.Worker">
     <Instances count="1" />
     <ConfigurationSettings>
+      <!--<Setting name="AzureStorageConnectionString" value="UseDevelopmentStorage=true" />-->
       <Setting name="AzureStorageConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="SqlAzureConnectionString" value="Server=tcp:kebye4rsuu.database.windows.net,1433;Database=PageFeedbackDb;User ID=PageFeedbackDbSa@kebye4rsuu;Password=startup$1;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+      <Setting name="SqlAzureConnectionString" value="Data Source=.\SQLEXPRESS;Database=PageFeedbackDb;Integrated Security=True;" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

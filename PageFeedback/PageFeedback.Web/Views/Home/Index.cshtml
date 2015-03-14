@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    
+ var fbAppId=   ViewData["FbAppId"];
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -29,6 +33,9 @@
     <script src="/content/js/docs.js"></script>
     <script src="/content/js/github.info.js"></script>
     <script src="/content/js/start-screen.js"></script>
+    <script type="text/javascript">
+        var fbAppId = @fbAppId;
+    </script>
     <script src="/content/js/Site.js"></script>
 
     <title>Page Feedback</title>

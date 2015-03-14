@@ -46,18 +46,20 @@ namespace PageFeedback.Web.Controllers
                 string fbToken = null;
                 if (Session["fbToken"] != null)
                 {
-                    fbToken = (string)Session["fbToken"];
+                    fbToken = Convert.ToString(Session["fbToken"]);
                 }
 
 
                 if (string.IsNullOrEmpty(fbToken))
                 {
-                    return RedirectToAction("token", "fb");
+                    throw new InvalidOperationException("no fb token");
                 }
                 else
                 {
                     var message = new CloudQueueMessage(fbToken);
                     queue.AddMessage(message);
+
+                    log.DebugFormat("message publish");
                     return Content("published");
                 }
 
@@ -78,7 +80,9 @@ namespace PageFeedback.Web.Controllers
         [HttpPost]
         public ActionResult Token(string fbToken)
         {
+            log.DebugFormat("fbToken {0}", fbToken);
             Session["fbToken"] = fbToken;
+            log.DebugFormat("update new token");
             return Content(fbToken);
         }
 

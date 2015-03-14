@@ -18,6 +18,7 @@
     <ConfigurationSettings>
       <Setting name="AzureStorageConnectionString" />
       <Setting name="SqlAzureConnectionString" />
+      <Setting name="FbAppId" />
     </ConfigurationSettings>
   </WebRole>
   <WorkerRole name="PageFeedback.Worker" vmsize="ExtraSmall">

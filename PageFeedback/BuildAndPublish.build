@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0"?>
-<project name="Deploy" default="BuildAndPackage" >
+<project name="Deploy" default="Publish" >
 
-	<property name="service" value="PageFeedback"/>
-	<property name="storage" value="pagefeedbackstorage"/>
+	<property name="service" value="pagefeedbackns"/>
+	<property name="storage" value="pagefeedbackstoragens"/>
 	<property name="environment" value="Production"/>
 	<property name="visualstudio.config" value="Release"/>
 
@@ -10,6 +10,10 @@
 	<property name="project.filename" value="${project.dir}PageFeedback.Azure/PageFeedback.Azure.ccproj"/>
 	<property name="output.dir" value="${project.dir}build/"/>
 	<property name="publish.dir" value="${project.dir}publish/"/>
+  <property name="SubscriptionName" value="BizSpark"/>
+  <property name="PublishToAzurePowerShellFile" value="PublishToAzure.ps1"/>
+
+  <property name="DeploymentLabel" value="build and publish to Azure at ${datetime::now()}"/>
 
 	<!--output Azure settings-->
 	<echo message="service = ${service}"/>
@@ -20,7 +24,7 @@
 	<echo message="project.filename = ${project.filename}"/>
 
 	<!--sleep to watch parameters value-->
-	<sleep seconds="5" />
+	<!--<sleep seconds="5" />-->
 
 	<target name="BuildAndPackage" description="package project">
 		<echo message="start building project"/>
@@ -39,6 +43,7 @@
 			<arg value="/property:TargetProfile=Cloud" />
 			<arg value="/property:PublishDir=${publish.dir}" />
 			<arg value="/property:OutDir=${output.dir}" />
+      <arg value="/property:VisualStudioVersion=11.0"/>
 			<arg value="/target:Publish" />
 			<arg value="/verbosity:detailed" />
 			<arg value="/nologo" />
@@ -48,25 +53,23 @@
 		
 	</target>
 
-	<!--depends="package"-->
-	<target name="publish"  >
-
+          
+	<target name="Publish" >
 		<echo message="start publishing new deployment"/>
-		<sleep seconds="5" />
+    <exec program="powershell" workingdir="${project.dir}">
+      <arg value='-ExecutionPolicy "UnRestricted"'/>
+      <arg value='-File "${project.dir}${PublishToAzurePowerShellFile}"'/>
+      <arg value='-subscription "${SubscriptionName}"'/>
+      <arg value='-service "${service}"'/>
+      <arg value='-storageAccount "${storage}"'/>
+      <arg value='-slot "${environment}"'/>
+      <arg value='-deploymentLabel "${DeploymentLabel}"'/>
+      <arg value='-package "${publish.dir}PageFeedback.Azure.cspkg"'/>
+      <arg value='-configuration "${publish.dir}ServiceConfiguration.Cloud.cscfg"'/>
+      <arg value='-publishSettingsFile "${project.dir}AzureSubscriptionFile.publishsettings"'/>
+    </exec>
 
-		<exec program="powershell" workingdir="${project.dir}">
-			<arg value='-File "${project.dir}PublishCloudService.ps1"'/>
-			<arg value='-subscription "BizSpark 1111"'/>
-			<arg value='-service "${service}"'/>
-			<arg value='-storageAccount "${storage}"'/>
-			<arg value='-slot "${environment}"'/>
-			<arg value='-deploymentLabel "deployed with PowerShell and Jenkins at ${datetime::now()}"'/>
-			<arg value='-package "${publish.dir}Noonswoon.Azure.cspkg"'/>
-			<arg value='-configuration "${publish.dir}ServiceConfiguration.Cloud.cscfg"'/>
-			<arg value='-publishSettingsFile "${project.dir}AzureSubscriptionFile.publishsettings"'/>
-		</exec>
-
-		<echo message="done publishing new deployment at ${datetime::now()}"/>
+    <echo message="done publishing new deployment at ${datetime::now()}"/>
 
 	</target>
 
